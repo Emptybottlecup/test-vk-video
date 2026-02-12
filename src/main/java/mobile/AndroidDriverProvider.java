@@ -18,6 +18,9 @@ import java.util.Properties;
 public class AndroidDriverProvider implements WebDriverProvider {
     private final Properties config = new Properties();
 
+    public static String appPackage;
+    public static String appActivity;
+
     public AndroidDriverProvider() {
         setConfig();
     }
@@ -29,8 +32,8 @@ public class AndroidDriverProvider implements WebDriverProvider {
         options.setDeviceName(config.getProperty("device.name"));
         options.setPlatformName(config.getProperty("platform.name"));
         options.setAutomationName(config.getProperty("automation.name"));
-        options.setAppPackage(config.getProperty("app.package"));
-        options.setAppActivity(config.getProperty("app.activity"));
+        options.setAppPackage(appPackage);
+        options.setAppActivity(appActivity);
         options.setNewCommandTimeout(Duration.ofSeconds(Long.parseLong(config.getProperty("new.command.timeout"))));
 
         try {

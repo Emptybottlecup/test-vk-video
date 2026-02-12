@@ -7,12 +7,10 @@ import com.codeborne.selenide.appium.SelenideAppium;
 import io.appium.java_client.android.AndroidDriver;
 import mobile.AndroidDriverProvider;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class BaseTest {
 
-    @BeforeAll
     public static void setUp() {
         Configuration.browser = AndroidDriverProvider.class.getName();
         Configuration.browserSize = null;

@@ -1,11 +1,8 @@
-package mobile.screens;
+package mobile.screens.vk;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.NetworkSpeed;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
@@ -20,8 +17,6 @@ public class HomeScreenVkVideo {
     private final SelenideElement firstVideo = $(AppiumBy.id("com.vk.vkvideo:id/video_subtitles"));
 
     public HomeScreenVkVideo skipAdvertisementAndAuthorization() {
-        AndroidDriver driver = (AndroidDriver) WebDriverRunner.getWebDriver();
-        driver.setNetworkSpeed(NetworkSpeed.LTE);
         long endTime = System.currentTimeMillis() + 60000;
         while (System.currentTimeMillis() < endTime) {
             if (closeAdvertisement.is(visible)) {
@@ -42,16 +37,5 @@ public class HomeScreenVkVideo {
         firstSuggestion.shouldBe(visible).click();
         firstVideo.shouldBe(visible).click();
         return new VideoScreenVkVideo();
-    }
-
-    public void notPlayVideo(String videoName) {
-        searchQuery.shouldBe(visible).setValue(videoName);
-        firstSuggestion.shouldBe(visible).click();
-
-        AndroidDriver driver = (AndroidDriver) WebDriverRunner.getWebDriver();
-        driver.toggleWifi();
-        driver.toggleData();
-
-        firstVideo.shouldBe(visible).click();
     }
 }
